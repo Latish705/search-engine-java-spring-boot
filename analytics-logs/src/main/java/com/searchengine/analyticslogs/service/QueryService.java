@@ -2,7 +2,7 @@ package com.searchengine.analyticslogs.service;
 
 
 import com.searchengine.analyticslogs.model.Query;
-import com.searchengine.analyticslogs.repository.QueryRespository;
+import com.searchengine.analyticslogs.repository.QueryRepository;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -10,27 +10,25 @@ import java.util.List;
 
 @Service
 public class QueryService {
-    private final QueryRespository queryRespository;
+    private final QueryRepository queryRepository;
 
-    public QueryService(QueryRespository queryRespository) {
-        this.queryRespository = queryRespository;
+    public QueryService(QueryRepository queryRepository) {
+        this.queryRepository = queryRepository;
     }
 
     public Query createQuery(Query query){
-        return queryRespository.save(query);
+        return queryRepository.save(query);
     }
 
     public List<Query> getAllQueries(){
-        return queryRespository.findAll(Sort.by(Sort.Direction.DESC, "timestamp"));
+        return queryRepository.findAll(Sort.by(Sort.Direction.DESC, "timestamp"));
     }
 
     public Boolean deleteQueryById(Long id){
-        if(queryRespository.existsById(id)){
-            queryRespository.deleteById(id);
+        if(queryRepository.existsById(id)){
+            queryRepository.deleteById(id);
             return true;
         }
         return false;
     }
 }
-
-

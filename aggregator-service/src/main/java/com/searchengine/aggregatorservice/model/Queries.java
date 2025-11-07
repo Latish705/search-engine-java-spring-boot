@@ -1,19 +1,19 @@
-package com.searchengine.analyticslogs.model;
-
+package com.searchengine.aggregatorservice.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
 
+@Entity
+@Table(name = "queries")
 @Data
 @NoArgsConstructor
-@Entity
-@Table(name="queries")
-public class Query {
-
+@AllArgsConstructor
+public class Queries {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -23,5 +23,4 @@ public class Query {
     @CreationTimestamp
     @Column(nullable = false, updatable = false)
     private LocalDateTime timestamp;
-
 }

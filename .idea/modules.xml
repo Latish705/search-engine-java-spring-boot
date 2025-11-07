@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/aggregator-service.main.iml" filepath="$PROJECT_DIR$/.idea/modules/aggregator-service.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/analytics-logs.main.iml" filepath="$PROJECT_DIR$/.idea/modules/analytics-logs.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/search-engine.iml" filepath="$PROJECT_DIR$/search-engine.iml" />
     </modules>
   </component>

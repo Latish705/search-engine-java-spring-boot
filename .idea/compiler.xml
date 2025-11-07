@@ -13,6 +13,9 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="aggregator-service" options="-parameters" />
+      <module name="aggregator-service.main" options="-parameters" />
+      <module name="aggregator-service.test" options="-parameters" />
       <module name="analytics-logs" options="-parameters" />
       <module name="analytics-logs.main" options="-parameters" />
       <module name="analytics-logs.test" options="-parameters" />

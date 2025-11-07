@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CopilotDiffPersistence">
+    <option name="pendingDiffs">
+      <map>
+        <entry key="$PROJECT_DIR$/analytics-logs/build.gradle">
+          <value>
+            <PendingDiffInfo>
+              <option name="filePath" value="$PROJECT_DIR$/analytics-logs/build.gradle" />
+              <option name="originalContent" value="plugins {&#10;    id 'java'&#10;    id 'org.springframework.boot' version '3.5.7'&#10;    id 'io.spring.dependency-management' version '1.1.7'&#10;}&#10;&#10;group = 'com.search-engine'&#10;version = '0.0.1-SNAPSHOT'&#10;description = 'analytics-logs'&#10;&#10;java {&#10;    toolchain {&#10;        languageVersion = JavaLanguageVersion.of(17)&#10;    }&#10;}&#10;&#10;configurations {&#10;    compileOnly {&#10;        extendsFrom annotationProcessor&#10;    }&#10;}&#10;&#10;repositories {&#10;    mavenCentral()&#10;}&#10;&#10;dependencies {&#10;    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'&#10;    implementation 'org.springframework.boot:spring-boot-starter-web'&#10;    compileOnly 'org.projectlombok:lombok'&#10;    developmentOnly 'org.springframework.boot:spring-boot-devtools'&#10;    runtimeOnly 'com.h2database:h2'&#10;    runtimeOnly 'org.postgresql:postgresql'&#10;    annotationProcessor 'org.projectlombok:lombok'&#10;    testImplementation 'org.springframework.boot:spring-boot-starter-test'&#10;    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'&#10;}&#10;&#10;tasks.named('test') {&#10;    useJUnitPlatform()&#10;}&#10;" />
+              <option name="updatedContent" value="plugins {&#10;    id 'java'&#10;    id 'org.springframework.boot' version '3.5.7'&#10;    id 'io.spring.dependency-management' version '1.1.7'&#10;}&#10;&#10;group = 'com.search-engine'&#10;version = '0.0.1-SNAPSHOT'&#10;description = 'analytics-logs'&#10;&#10;java {&#10;    toolchain {&#10;        languageVersion = JavaLanguageVersion.of(17)&#10;    }&#10;}&#10;&#10;configurations {&#10;    compileOnly {&#10;        extendsFrom annotationProcessor&#10;    }&#10;}&#10;&#10;repositories {&#10;    mavenCentral()&#10;}&#10;&#10;dependencies {&#10;    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'&#10;    implementation 'org.springframework.boot:spring-boot-starter-web'&#10;    implementation 'org.springframework.boot:spring-boot-starter-quartz'&#10;    compileOnly 'org.projectlombok:lombok'&#10;    developmentOnly 'org.springframework.boot:spring-boot-devtools'&#10;    runtimeOnly 'org.postgresql:postgresql'&#10;    annotationProcessor 'org.projectlombok:lombok'&#10;    testImplementation 'org.springframework.boot:spring-boot-starter-test'&#10;    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'&#10;}&#10;&#10;tasks.named('test') {&#10;    useJUnitPlatform()&#10;}" />
+            </PendingDiffInfo>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/analytics-logs/src/main/java/com/searchengine/analyticslogs/job/QuerySchedulerJob.java">
+          <value>
+            <PendingDiffInfo>
+              <option name="filePath" value="$PROJECT_DIR$/analytics-logs/src/main/java/com/searchengine/analyticslogs/job/QuerySchedulerJob.java" />
+              <option name="originalContent" value="&#10;" />
+              <option name="updatedContent" value="package com.searchengine.analyticslogs.job;&#10;&#10;import org.quartz.JobExecutionContext;&#10;import org.quartz.JobExecutionException;&#10;import org.springframework.scheduling.quartz.QuartzJobBean;&#10;import org.springframework.beans.factory.annotation.Autowired;&#10;import org.springframework.stereotype.Component;&#10;import com.searchengine.analyticslogs.service.QueryService;&#10;&#10;@Component&#10;public class QuerySchedulerJob extends QuartzJobBean {&#10;&#10;    @Autowired&#10;    private QueryService queryService;&#10;&#10;    @Override&#10;    protected void executeInternal(JobExecutionContext context) throws JobExecutionException {&#10;        // Your scheduled task logic here&#10;        queryService.getAllQueries();&#10;    }&#10;}" />
+            </PendingDiffInfo>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
