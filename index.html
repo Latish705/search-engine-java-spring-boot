@@ -422,6 +422,23 @@
             </div>
           </div>
         </div>
+
+        <!-- Trie Builder Card -->
+        <div class="card">
+          <h2>
+            <span class="card-icon">🌳</span>
+            Trie Data Structure
+          </h2>
+          <button class="btn" onclick="buildTrie()" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+            Build/Rebuild Trie
+          </button>
+          <div id="trieBuilderData" class="data-list">
+            <div class="empty-state">
+              <div class="empty-state-icon">🌳</div>
+              <p>Click "Build/Rebuild Trie" to create the search suggestion data structure</p>
+            </div>
+          </div>
+        </div>
       </div>
 
       <!-- Service Status Card -->
@@ -704,6 +721,69 @@
         } catch (error) {
           console.error("Error loading aggregated data:", error);
           dataDiv.innerHTML = `<div class="error">Failed to load aggregated data. Make sure the Aggregator service is running on port 8090.</div>`;
+        }
+      }
+
+      // Build Trie
+      async function buildTrie() {
+        const dataDiv = document.getElementById("trieBuilderData");
+        showLoading(dataDiv);
+
+        try {
+          const response = await fetch(`${config.workersService}/build-trie`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          });
+
+          if (!response.ok) throw new Error("Failed to build trie");
+
+          const result = await response.json();
+          
+          // Display success message with details
+          dataDiv.innerHTML = `
+            <div class="success">
+              <strong>✅ Trie built successfully!</strong>
+              <div style="margin-top: 10px;">
+                ${result.message || "The trie data structure has been created from the aggregated queries."}
+              </div>
+            </div>
+            ${result.details ? `
+              <div class="data-item" style="margin-top: 15px;">
+                <div class="query-text">Build Details</div>
+                <div class="query-meta">
+                  ${Object.entries(result.details).map(([key, value]) => 
+                    `<div style="margin: 5px 0;"><strong>${key}:</strong> ${value}</div>`
+                  ).join('')}
+                </div>
+              </div>
+            ` : ''}
+            <div class="data-item" style="margin-top: 15px;">
+              <div class="query-meta">
+                <strong>ℹ️ Note:</strong> The trie is now updated with the latest search queries. 
+                Try typing in the search box above to see auto-suggestions powered by the trie!
+              </div>
+            </div>
+          `;
+        } catch (error) {
+          console.error("Error building trie:", error);
+          dataDiv.innerHTML = `
+            <div class="error">
+              <strong>❌ Failed to build trie</strong>
+              <div style="margin-top: 10px;">
+                Make sure the Workers service is running on port 8100 and there is aggregated data available.
+              </div>
+              <div style="margin-top: 10px; font-size: 0.9em;">
+                <strong>Steps to resolve:</strong>
+                <ol style="margin-left: 20px; margin-top: 5px;">
+                  <li>Search some queries to create data</li>
+                  <li>Run aggregation to process the queries</li>
+                  <li>Then build the trie</li>
+                </ol>
+              </div>
+            </div>
+          `;
         }
       }
 

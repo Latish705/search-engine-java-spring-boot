@@ -53,11 +53,11 @@ async function main() {
 
       if (doc) {
         await redisClient.set(prefix, doc.suggestions, {
-          ex: 3600,
+          ex: 10,
         });
         return res.status(200).send(doc.suggestions);
       } else {
-        await redisClient.set(prefix, [], { ex: 3600 });
+        await redisClient.set(prefix, [], { ex: 10 });
         return res.status(200).send([]);
       }
     } catch (error) {
