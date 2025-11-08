@@ -1,4 +1,4 @@
-import SuggestionModel from "../models/suggestionSchema";
+import PrefixSuggestionModel from "../models/prefixSuggestionSchema";
 import { TrieNode } from "./TrieNode";
 
 export class TrieStorageService {
@@ -6,12 +6,21 @@ export class TrieStorageService {
     const allOps: any[] = [];
     console.log("Flattening in-memory Trie...");
     this._dfsSerialize(root, "", allOps);
+    if (allOps.length > 0) {
+      await this._writeBatch(allOps);
+    }
   }
 
   async _writeBatch(allOps: any[]) {
-    console.log("Writing batch of ", allOps.length, " operations to DB...");
-    await SuggestionModel.bulkWrite(allOps);
-    console.log("Batch write completed.");
+    try {
+      console.log("Writing batch of", allOps.length, "operations to DB...");
+      console.log("First operation:", JSON.stringify(allOps[0], null, 2));
+      const result = await PrefixSuggestionModel.bulkWrite(allOps);
+      console.log("Batch write completed. Modified:", result.modifiedCount, "Upserted:", result.upsertedCount);
+    } catch (error) {
+      console.error("Error writing batch to DB:", error);
+      throw error;
+    }
   }
 
   _dfsSerialize(node: TrieNode, prefix: string, allOps: any[]) {
@@ -25,8 +34,8 @@ export class TrieStorageService {
       });
     }
 
-    for (const char in node.children) {
-      this._dfsSerialize(node.children.get(char)!, prefix + char, allOps);
+    for (const [char, childNode] of node.children.entries()) {
+      this._dfsSerialize(childNode, prefix + char, allOps);
     }
   }
 }

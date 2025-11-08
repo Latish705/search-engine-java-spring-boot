@@ -1,0 +1,1 @@
+{"root":["./src/app.ts","./src/config/db.ts","./src/controller/datacontroller.ts","./src/models/aggregatedqueryschema.ts","./src/models/prefixsuggestionschema.ts","./src/models/suggestionschema.ts","./src/services/triebuilder.ts","./src/services/trienode.ts","./src/services/triestorage.ts"],"version":"5.7.2"}

@@ -45,4 +45,9 @@ public class AggregatorService {
 
         System.out.println("Finished Aggregator Service");
     }
+
+
+    public List<AggregatedQuery> getQueries(){
+        return aggregatedQueryRepository.findAll();
+    }
 }

@@ -1,6 +1,6 @@
 import mongoose, { Schema, model, Document } from "mongoose";
 
-export interface ISuggestion extends Document {
+export interface ISuggestion {
   query: string;
   frequency: number;
 }
