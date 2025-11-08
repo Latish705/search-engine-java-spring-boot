@@ -429,13 +429,22 @@
             <span class="card-icon">🌳</span>
             Trie Data Structure
           </h2>
-          <button class="btn" onclick="buildTrie()" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+          <button
+            class="btn"
+            onclick="buildTrie()"
+            style="
+              background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            "
+          >
             Build/Rebuild Trie
           </button>
           <div id="trieBuilderData" class="data-list">
             <div class="empty-state">
               <div class="empty-state-icon">🌳</div>
-              <p>Click "Build/Rebuild Trie" to create the search suggestion data structure</p>
+              <p>
+                Click "Build/Rebuild Trie" to create the search suggestion data
+                structure
+              </p>
             </div>
           </div>
         </div>
@@ -740,25 +749,35 @@
           if (!response.ok) throw new Error("Failed to build trie");
 
           const result = await response.json();
-          
+
           // Display success message with details
           dataDiv.innerHTML = `
             <div class="success">
               <strong>✅ Trie built successfully!</strong>
               <div style="margin-top: 10px;">
-                ${result.message || "The trie data structure has been created from the aggregated queries."}
+                ${
+                  result.message ||
+                  "The trie data structure has been created from the aggregated queries."
+                }
               </div>
             </div>
-            ${result.details ? `
+            ${
+              result.details
+                ? `
               <div class="data-item" style="margin-top: 15px;">
                 <div class="query-text">Build Details</div>
                 <div class="query-meta">
-                  ${Object.entries(result.details).map(([key, value]) => 
-                    `<div style="margin: 5px 0;"><strong>${key}:</strong> ${value}</div>`
-                  ).join('')}
+                  ${Object.entries(result.details)
+                    .map(
+                      ([key, value]) =>
+                        `<div style="margin: 5px 0;"><strong>${key}:</strong> ${value}</div>`
+                    )
+                    .join("")}
                 </div>
               </div>
-            ` : ''}
+            `
+                : ""
+            }
             <div class="data-item" style="margin-top: 15px;">
               <div class="query-meta">
                 <strong>ℹ️ Note:</strong> The trie is now updated with the latest search queries. 
